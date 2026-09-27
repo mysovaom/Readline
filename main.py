@@ -55,6 +55,13 @@ def otmetca_daty():
     with open("ivents.json", "w", encoding="utf-8") as f:
         json.dump(ivents, f, ensure_ascii=False, indent=4)
 
+def show_ivents():
+    with open("ivents.json", "r", encoding="utf-8") as f:
+        ivents = json.load(f)
+    for key in ivents:
+        print(f"{key}: {ivents[key]}")
+
+
 
 
 print('Вас приветствует программа Readline!\n Моя программа ддля чтения электронных книг и для контроля дедлайнов\n Сейчас в наличии только книга Александра Сергеевича Пушкина "Евгений Онегин"')
