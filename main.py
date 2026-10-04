@@ -6,6 +6,8 @@ import json
 # ПЕРЕМЕННЫЕ
 onegins_pages=0
 all_pages=0
+start_1 = 0
+end_1 = 0
 #-------------
 
 def get_lines(filename, start=0, count=20):
@@ -25,8 +27,9 @@ def get_lines(filename, start=0, count=20):
         lines = text.split("\n")
     else:
         lines = str(text).split("\n")
+    global start_1,end_1
 
-    return lines[start:start + count]
+    return lines[start_1:start + count]
 
 
 def print_page(filename, start, count=20):
@@ -46,7 +49,7 @@ def flip_onegin():
 # flip_onegin()
 # flip_onegin()
 # print(print_page_onegin("Onegin.json"))
-def otmetca_daty():
+def mark_date():
     key_ivent = input("Введите название события:")
     ivent_data = input("Введите дату в формате дд.мм.гггг:")
     with open("ivents.json", "r", encoding="utf-8") as f:
@@ -64,6 +67,11 @@ def show_ivents():
 
 
 
-print('Вас приветствует программа Readline!\n Моя программа ддля чтения электронных книг и для контроля дедлайнов\n Сейчас в наличии только книга Александра Сергеевича Пушкина "Евгений Онегин"')
+print('Вас приветствует программа Readline!\n Моя программа для чтения электронных книг и для контроля дедлайнов\n Сейчас в наличии только книга Александра Сергеевича Пушкина "Евгений Онегин"')
 print('Вы можете:\n1.Начать читать "Евгений Онегин"\n2.Выйти\n3.Отметить в электронном календаре событие\n4.Просмотреть все события')
-otmetca_daty()
+mark_date()
+show_ivents()
+input()
+flip_onegin()
+input()
+flip_onegin()
