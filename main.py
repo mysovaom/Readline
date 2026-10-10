@@ -6,12 +6,18 @@ import json
 # ПЕРЕМЕННЫЕ
 onegins_pages=0
 all_pages=0
-start_1 = 0
-end_1 = 0
-#-------------
 
-def get_lines(filename, start=0, count=20):
+#-------------
+def start_giver(filename):
+    if filename == "Onegin.json":
+        global onegins_pages
+        return onegins_pages * 20
+    return None
+
+
+def get_lines(filename, start, count=20):
     """Получить count строк из файла начиная с start."""
+    start = start_giver(filename)
     with open(filename, "r", encoding="utf-8") as f:
         text = json.load(f)
 
@@ -27,9 +33,8 @@ def get_lines(filename, start=0, count=20):
         lines = text.split("\n")
     else:
         lines = str(text).split("\n")
-    global start_1,end_1
 
-    return lines[start_1:start + count]
+    return lines[start:start + count]
 
 
 def print_page(filename, start, count=20):
@@ -46,9 +51,7 @@ def flip_onegin():
     onegins_pages += 1
     all_pages += 1
     print_page("Onegin.json", onegins_pages)
-# flip_onegin()
-# flip_onegin()
-# print(print_page_onegin("Onegin.json"))
+
 def mark_date():
     key_ivent = input("Введите название события:")
     ivent_data = input("Введите дату в формате дд.мм.гггг:")
@@ -64,14 +67,19 @@ def show_ivents():
     for key in ivents:
         print(f"{key}: {ivents[key]}")
 
+def exit():
+    with open("variables.json", "w", encoding="utf-8") as f:
+        json.dump({"onegins_pages": onegins_pages}, f, indent=4, ensure_ascii=False)
+        json.dump({"all_pages": all_pages}, f, indent=4, ensure_ascii=False)
 
 
 
-print('Вас приветствует программа Readline!\n Моя программа для чтения электронных книг и для контроля дедлайнов\n Сейчас в наличии только книга Александра Сергеевича Пушкина "Евгений Онегин"')
-print('Вы можете:\n1.Начать читать "Евгений Онегин"\n2.Выйти\n3.Отметить в электронном календаре событие\n4.Просмотреть все события')
-mark_date()
-show_ivents()
-input()
+
+
+# print('Вас приветствует программа Readline!\n Моя программа для чтения электронных книг и для контроля дедлайнов\n Сейчас в наличии только книга Александра Сергеевича Пушкина "Евгений Онегин"')
+# print('Вы можете:\n1.Начать читать "Евгений Онегин"\n2.Выйти\n3.Отметить в электронном календаре событие\n4.Просмотреть все события')
 flip_onegin()
-input()
 flip_onegin()
+flip_onegin()
+print(onegins_pages, all_pages)
+exit()
